@@ -1,11 +1,11 @@
 function Playlist(props) {
     return (
         <div>
-            <img src={props.item.image}></img>
+            {<img src={props.item.images[0]}></img>}
             <h2 id="name">{props.item.name}</h2>
-            <p id="user">{props.item.user}</p>
-            <p id="numberofsongs">{props.item.numoftracks}</p>
-            <p id="playtime">{props.item.length}</p>
+            <p id="user">{props.item.owner.id}</p>
+            <p id="numberofsongs">{props.item.tracks.total}</p>
+            <p id="playtime">playtime placeholder</p>
         </div>
     )
 }

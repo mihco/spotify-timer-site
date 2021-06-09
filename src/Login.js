@@ -5,8 +5,8 @@ function Login(props) {
         <div>
           <h1>Timer</h1>
           <Spotify/>
-          <button onClick={props.func}>Log In</button>
-          <footer>Created by mihco</footer>
+          <a href="http://localhost:8888">Log In</a>
+          <footer>Created by ur mom</footer>
         </div>
       )
 }
