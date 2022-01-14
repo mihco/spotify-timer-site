@@ -1,12 +1,10 @@
-import Spotify from "./Spotify"
+
 
 function Login(props) {
     return (
-        <div>
-          <h1>Timer</h1>
-          <Spotify/>
-          <a href="http://localhost:8888">Log In</a>
-          <footer>Created by ur mom</footer>
+        <div className ="center-frame text-center">
+          <h1 className="centered">Spotifimer</h1>
+          <a className="btn btn-primary btn-block" href="http://localhost:8888/login">Log In</a>
         </div>
       )
 }

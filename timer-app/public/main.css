@@ -1,0 +1,28 @@
+#root {
+    align-items: center;
+    position: relative;
+    padding: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #1DB954;
+    height: 100vh;
+  }
+  
+p {
+    font-family: 'Times New Roman';
+    display: block;
+}
+
+.centered {
+  margin: auto;
+  width: 50%;
+}
+
+footer {
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-color: blueviolet;
+}

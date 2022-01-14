@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import SpotifyWebApi from 'spotify-web-api-js';
 import { getHash } from './getHash.js'
+import { songChooser } from './playlistchooser'
 const spotifyApi = new SpotifyWebApi();
 
 function Playlist(props) {
@@ -19,18 +20,18 @@ function Playlist(props) {
     const loading = "https://res.cloudinary.com/practicaldev/image/fetch/s--huFQ3nbp--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/gqmymopg8bignlcfhvcx.gif"
     if(playlist) {
         return (
-            <div className="card mb-3" style={{maxWidth: "700px"}}>
+            <div className="card mb-3 justify-content-center mx-auto" style={{maxWidth: "600px"}}>
                 <div className="row g-0">
-                    <div className="col-md-4">
-                        {<img src={image ? image["url"] : loading} style={{width: "200px", height: "200px", objectFit: "cover", display: "block"}}></img>}
+                    <div className="col-md-4 justify-content-center">
+                        {<img src={image ? image["url"] : loading} style={{width: "200px", height: "200px", objectFit: "cover"}}></img>}
                     </div>
                     <div className="col-md-7">
                     <div className="card-body">
                         <h5 className="card-title" id="name">{playlist.name}</h5>
                         <p className="card-text" id="user">owner</p>
                         <p className="card-text" id="numberofsongs"><small className="text-muted">{playlist.tracks.total}</small></p>
-                        <p className="card-text" id="playtime"><small className="text-muted">playtime placeholder</small></p>
-                        {props.withButton && <input type="submit" className="btn btn-dark" value="Pick Me" id={playlist.id} form="playlistChoose"></input>}
+                        <p className="card-text" id="playtime"><small className="text-muted">Time:</small></p>
+                        {props.withButton && <input type="submit" className="btn btn-dark" value="Submit" id={playlist.id} form="playlistChoose"></input>}
                         {/* ADD A TAG TO DISPLAY ESTIMATED RUNTIME */}
                     </div>
                     </div>

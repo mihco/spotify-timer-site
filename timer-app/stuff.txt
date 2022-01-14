@@ -1,0 +1,10 @@
+client id: f5227eb26e8341b8b08616240dc1972f
+client secret: 26a68eba739747919e092e21bc418c9b
+
+<div className="container">
+            {<img src={image ? image["url"] : loading}></img>}
+            <h2 id="name">{props.item.name}</h2>
+            <p id="user">{props.item.owner.id}</p>
+            <p id="numberofsongs">{props.item.tracks.total}</p>
+            <p id="playtime">playtime placeholder</p>
+        </div>

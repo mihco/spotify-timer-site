@@ -1,7 +1,7 @@
 function sum(list) {
     let sum = 0
     for(let i = 0; i < list.length; i++) {
-        sum += list[i]
+        sum += list[i].track.duration_ms
     }
     return sum
 }
@@ -18,7 +18,7 @@ function shuffle(array) {
     var currentIndex = array.length,  randomIndex;
     
     // While there remain elements to shuffle...
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
     
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -32,8 +32,9 @@ function shuffle(array) {
     return array;
 }
 
-export function songChooser(playlist, time, range=0) {
-    let subsets = getAllSubsets(playlist)
+export function songChooser(playlistItems, timeObj, range=0) {
+    let time = (timeObj.hours * 3600000) + (timeObj.minutes * 60000) + (timeObj.seconds * 1000)
+    let subsets = getAllSubsets(playlistItems)
     let validPlaylists = []
     for(let i = 0; i < subsets.length; i++) {
         let subSum = sum(subsets[i])
@@ -41,6 +42,6 @@ export function songChooser(playlist, time, range=0) {
             validPlaylists.push(subsets[i])
         }
     }
-    return shuffle(shuffle(validPlaylists)[0])
+    return {orderedSongs: validPlaylists[0], totalTime_ms: time} 
 
 }

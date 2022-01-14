@@ -22,16 +22,19 @@ class App extends React.Component {
       loggedIn: this.token ? true : false,
       playlists: [],
       playlistChosen: false,
-      playlistId: ""
+      playlistId: "",
+      timeSelected: {hours: 0, minutes: 0, seconds: 0}
     }
     this.playlistChoose = this.playlistChoose.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     if(this.token) {
       console.log("doing the promise thing")
       spotifyApi.getUserPlaylists().then(data => (
-        this.setState({playlists: data["items"]})
+        this.setState({playlists: data["items"]}),
+        console.log(data["items"])
         ), err => (console.log(err)))
     }
   }
@@ -57,22 +60,47 @@ class App extends React.Component {
     })
   }
 
+  handleChange(event) {
+    
+    this.setState(prevState => {
+      let stateUpdate = {timeSelected: {hours: prevState.timeSelected.hours, minutes: prevState.timeSelected.minutes, seconds: prevState.timeSelected.seconds}}
+      stateUpdate.timeSelected[event.target.id] = event.target.value
+      return stateUpdate
+    })
+  }
+
   render() {
     if(this.state.playlistChosen) {
       console.log("this if works")
       return(
-        <div>
-          <Timer playlistId={this.state.playlistId}/>
+        <div id="gaming" className="text-center">
+          <Timer playlistId={this.state.playlistId} token={this.token} timeSelected={this.state.timeSelected}/>
         </div>
       )
     } else if(this.state.loggedIn) {
       return (
-        <div>
+        <div id="gaming" className="text-center">
           <form onSubmit={this.playlistChoose} id="playlistChoose">
             <h1>Enter a time</h1> {/* make this into one component */}
-            <input type="time"></input>
+            {/* change api calls so that you can display the different playlists that are available with the time that is inputted */}
+            <div style={{ borderWidth: "5px", borderColor: "black", border: "solid", width: "370px", boxSizing: "border-box", margin: "auto", borderRadius: "20px", justifyContent: "space-around", display: "flex"}}>
+              <div style={{margin: "5px", display: "inline-block", width: "33%"}}>
+                <h5>Hours:</h5>
+                <input type="number" id="hours" min="0" max="2" style={{width: "50px"}} onInput={this.handleChange} value={this.state.timeSelected.hours}></input>
+              </div>
+              <div style={{margin: "5px", display: "inline-block", width: "33%"}}>
+                <h5>Minutes:</h5>
+                <input type="number" id="minutes" min="0" max="59" style={{width: "50px"}} onInput={this.handleChange} value={this.state.timeSelected.minutes}></input>
+              </div>
+              <div style={{margin: "5px", display: "inline-block", width: "33%"}}>
+                <h5>Seconds:</h5>
+                <input type="number" id="seconds" min="0" max="59" style={{width: "50px"}} onInput={this.handleChange} value={this.state.timeSelected.seconds}></input>
+              </div>
+            </div>
             <h1>Choose a Playlist</h1>
+            <div style={{maxHeight: "225px", display: "inline-block", overflow: "auto", border: "solid"}} className="align-item-center">
             { this.state.playlists ? this.state.playlists.map(item => <Playlist id={item.id} key={item.id} withButton={true}/>) : <img src={loading} /> }
+            </div>
           </form>
           <button className="btn btn-dark">Refresh Token</button>
           <button className="btn btn-secondary">Log Out</button>
